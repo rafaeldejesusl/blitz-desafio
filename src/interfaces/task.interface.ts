@@ -1,8 +1,8 @@
-interface Task {
+interface ITask {
   id?: number;
   name: string;
   createdAt: Date;
   status: string;
 }
 
-export default Task;
+export default ITask;

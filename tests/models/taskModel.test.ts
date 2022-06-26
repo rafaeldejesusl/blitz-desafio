@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { ResultSetHeader } from 'mysql2';
 import sinon from 'sinon';
-import connection from '../src/models/connection';
-import TaskModel from '../src/models/task.model';
+import connection from '../../src/models/connection';
+import TaskModel from '../../src/models/task.model';
 
 describe('Cria uma nova tarefa', () => { 
 
@@ -20,7 +20,9 @@ describe('Cria uma nova tarefa', () => {
         serverStatus: 0,
         warningStatus: 0,
       };
+
       sinon.stub(connection, 'execute').resolves([execute, []]);
+      
       const response = await model.create({ name: 'name', createdAt: new Date(), status: 'ativo' });
 
       expect(response).to.have.a.property('id');

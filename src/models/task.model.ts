@@ -1,14 +1,15 @@
 import { Pool, ResultSetHeader } from 'mysql2/promise';
-import Task from '../interfaces/task.interface';
+import ITaskModel from '../interfaces/model.interface';
+import ITask from '../interfaces/task.interface';
 
-class TaskModel {
+class TaskModel implements ITaskModel {
   public connection: Pool;
 
   constructor(connection: Pool) {
     this.connection = connection;
   }
 
-  public async create(task: Task): Promise<Task> {
+  public async create(task: ITask): Promise<ITask> {
     const { name, createdAt, status } = task;
     const result = await this.connection.execute<ResultSetHeader>(
       'INSERT INTO Ebytr.Tasks (name, createdAt, status) VALUES (?, ?, ?, ?)',
