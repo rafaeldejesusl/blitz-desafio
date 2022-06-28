@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import ITaskService from '../interfaces/service.interface';
 
-class TaskContoller {
+class TaskController {
   public service: ITaskService;
 
   constructor(service: ITaskService) {
@@ -16,4 +16,4 @@ class TaskContoller {
   };
 }
 
-export default TaskContoller;
+export default TaskController;

@@ -3,14 +3,14 @@ import { expect } from "chai";
 import TaskModel from "../../src/models/task.model";
 import connection from "../../src/models/connection";
 import TaskService from "../../src/services/task.service";
-import TaskContoller from "../../src/controllers/task.controller";
+import TaskController from "../../src/controllers/task.controller";
 
 describe('Ao chamar o controller de create', () => {
 
   describe('quando inserido corretamente', () => {
     const model = new TaskModel(connection);
     const service = new TaskService(model);
-    const controller = new TaskContoller(service);
+    const controller = new TaskController(service);
     const response: any = {};
     const request: any = {};
     request.body = { name: 'algo', status: 'ativo' }
