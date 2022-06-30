@@ -19,6 +19,12 @@ class TaskController {
     const tasks = await this.service.getAll();
     return res.status(200).json(tasks);
   };
+
+  public erase = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await this.service.erase(Number(id));
+    return res.status(204).end();
+  };
 }
 
 export default TaskController;
