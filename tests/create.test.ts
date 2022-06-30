@@ -37,7 +37,7 @@ describe('Quando é feita a requisição', () => {
     clock.restore();
   });
 
-  it('Método post /task', async () => {
+  it('Método post /tasks', async () => {
     const response = await chai.request(app).post('/tasks').send({ name: 'algo', status: 'ativo' });
     expect(response.status).to.be.equal(201);
     expect(response.body).to.be.eql({ id: 1, name: 'algo', createdAt: time.toJSON(), status: 'ativo' });
