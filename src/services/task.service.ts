@@ -12,6 +12,11 @@ class TaskService {
     const newTask = this.model.create(task);
     return newTask;
   }
+
+  public async getAll(): Promise<ITask[]> {
+    const tasks = await this.model.getAll();
+    return tasks;
+  }
 }
 
 export default TaskService;
