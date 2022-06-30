@@ -27,6 +27,14 @@ class TaskModel implements ITaskModel {
     const [rows] = result;
     return rows as ITask[];
   }
+
+  public async erase(id: number): Promise<{ id: number }> {
+    await this.connection.execute(
+      'DELETE FROM Ebytr.Tasks WHERE id=?',
+      [id],
+    );
+    return { id };
+  }
 }
 
 export default TaskModel;
