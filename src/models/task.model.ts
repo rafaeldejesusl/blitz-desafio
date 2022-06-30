@@ -12,7 +12,7 @@ class TaskModel implements ITaskModel {
   public async create(task: ITask): Promise<ITask> {
     const { name, createdAt, status } = task;
     const result = await this.connection.execute<ResultSetHeader>(
-      'INSERT INTO Ebytr.Tasks (name, createdAt, status) VALUES (?, ?, ?, ?)',
+      'INSERT INTO Ebytr.Tasks (name, createdAt, status) VALUES (?, ?, ?)',
       [name, createdAt, status],
     );
     const [dataInserted] = result;
