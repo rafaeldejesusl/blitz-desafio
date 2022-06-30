@@ -19,6 +19,14 @@ class TaskModel implements ITaskModel {
     const { insertId } = dataInserted;
     return { id: insertId, ...task };
   }
+
+  public async getAll(): Promise<ITask[]> {
+    const result = await this.connection.execute(
+      'SELECT * FROM Ebytr.Tasks',
+    );
+    const [rows] = result;
+    return rows as ITask[];
+  }
 }
 
 export default TaskModel;
