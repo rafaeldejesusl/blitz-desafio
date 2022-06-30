@@ -12,4 +12,6 @@ router.get('/tasks', taskController.getAll);
 
 router.post('/tasks', taskController.create);
 
+router.delete('/tasks/:id', taskController.erase);
+
 export default router;
