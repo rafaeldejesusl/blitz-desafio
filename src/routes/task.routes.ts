@@ -8,6 +8,8 @@ const router = Router();
 
 const taskController = new TaskController(new TaskService(new TaskModel(connection)));
 
+router.get('/tasks', taskController.getAll);
+
 router.post('/tasks', taskController.create);
 
 export default router;
