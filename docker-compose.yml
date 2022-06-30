@@ -45,7 +45,7 @@ services:
   # Serviço que irá rodar o banco de dados
   db:
     container_name: blitz-db
-    image: mysql:8.0.21
+    image: mysql:5.7
     restart: always
     # Lista de portas mapeadas de dentro para fora do container
     # na notação porta_de_fora:porta_de_dentro

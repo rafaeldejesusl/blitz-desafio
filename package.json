@@ -6,9 +6,10 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"src/**/*.spec.ts,src/**/*.json\" --exec \"ts-node src/index.ts\"",
-    "test": "mocha -r ts-node/register tests/**/*.ts --exit",
-    "coverage": "nyc --all --include src/models --include src/services --include src/controllers mocha -r ts-node/register tests/**/*.ts --exit",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "test": "mocha -r ts-node/register tests/*.ts --exit",
+    "coverage": "nyc --all --include src/models --include src/services --include src/controllers mocha -r ts-node/register tests/*.ts --exit",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "restore": "node ./tests/restoreDB.js"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,7 @@
     "@typescript-eslint/eslint-plugin": "5.3.1",
     "@typescript-eslint/parser": "5.3.1",
     "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "eslint": "7.32.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "15.0.0",
@@ -31,6 +33,7 @@
     "eslint-plugin-mocha": "9.0.0",
     "eslint-plugin-sonarjs": "0.10.0",
     "mocha": "^10.0.0",
+    "mysql-import": "^5.0.21",
     "nodemon": "2.0.14",
     "nyc": "^15.1.0",
     "sinon": "^14.0.0",
