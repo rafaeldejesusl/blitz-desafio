@@ -14,4 +14,6 @@ router.post('/tasks', taskController.create);
 
 router.delete('/tasks/:id', taskController.erase);
 
+router.put('/tasks/:id', taskController.edit);
+
 export default router;
