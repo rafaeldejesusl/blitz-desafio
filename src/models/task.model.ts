@@ -35,6 +35,13 @@ class TaskModel implements ITaskModel {
     );
     return { id };
   }
+
+  public async edit(id: number, status: string): Promise<void> {
+    await this.connection.execute(
+      'UPDATE Ebytr.Tasks SET status=? WHERE id=?',
+      [status, id],
+    );
+  }
 }
 
 export default TaskModel;
