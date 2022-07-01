@@ -1,7 +1,10 @@
 import express, { NextFunction, Request, Response } from 'express';
+import dotenv from 'dotenv';
 import TaskRoutes from './routes/task.routes';
 import ErrorHandler from './interfaces/error.interface';
 import 'express-async-errors';
+
+dotenv.config();
 
 const app = express();
 
@@ -9,7 +12,7 @@ app.use(express.json());
 
 app.use(TaskRoutes);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use((err: ErrorHandler, req: Request, res: Response, _next: NextFunction) => {
   const { status, message } = err;
