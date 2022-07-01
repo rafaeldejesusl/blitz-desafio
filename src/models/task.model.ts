@@ -42,6 +42,24 @@ class TaskModel implements ITaskModel {
       [status, id],
     );
   }
+
+  public async findByName(name: string): Promise<ITask[]> {
+    const result = await this.connection.execute(
+      'SELECT * FROM Ebytr.Tasks WHERE name=?',
+      [name],
+    );
+    const [rows] = result;
+    return rows as ITask[];
+  }
+
+  public async findById(id: number): Promise<ITask[]> {
+    const result = await this.connection.execute(
+      'SELECT * FROM Ebytr.Tasks WHERE id=?',
+      [id],
+    );
+    const [rows] = result;
+    return rows as ITask[];
+  }
 }
 
 export default TaskModel;
