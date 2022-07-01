@@ -7,7 +7,7 @@
     "start": "ts-node src/index.ts",
     "dev": "nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"src/**/*.spec.ts,src/**/*.json\" --exec \"ts-node src/index.ts\"",
     "test": "mocha -r ts-node/register tests/*.ts --exit",
-    "coverage": "nyc --all --include src/models --include src/services --include src/controllers mocha -r ts-node/register tests/*.ts --exit",
+    "coverage": "nyc --all --include src/models --include src/services --include src/controllers --include src/middlewares mocha -r ts-node/register tests/*.ts --exit",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "restore": "node ./tests/restoreDB.js"
   },
