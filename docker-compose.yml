@@ -2,9 +2,9 @@ version: "3"
 
 services:
   # Serviço que irá rodar o node
-  node:
+  backend:
     # Imagem base do container
-    image: node:16
+    build: ./backend
     # Nome do container para facilitar execução
     container_name: blitz-back
     # Mesmo que `docker run -t`
@@ -21,14 +21,14 @@ services:
     volumes:
       # Monta o diretório atual, com todos os dados do projeto, 
       # dentro do diretório /app
-      - ./:/app
+      - ./backend:/app
     # Lista de portas mapeadas de dentro para fora do container
     # na notação porta_de_fora:porta_de_dentro
     ports:
       # Expõe a porta padrão da aplicação: altere aqui caso use outra porta
-      - 3000:3000
+      - 3001:3001
     environment:
-      PORT: 3000
+      PORT: 3001
       DB_USER: root
       DB_PASSWORD: password
       DB_HOST: db
@@ -41,6 +41,19 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    container_name: blitz-front
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]  # Caso utilize outra porta interna para o front, altere ela aqui também
+      timeout: 15s
+      retries: 7
+    command: npm start
 
   # Serviço que irá rodar o banco de dados
   db:
