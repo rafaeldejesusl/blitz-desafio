@@ -22,6 +22,10 @@ class TaskService {
     const deletedTask = await this.model.erase(id);
     return deletedTask;
   }
+
+  public async edit(id: number, status: string): Promise<void> {
+    await this.model.edit(id, status);
+  }
 }
 
 export default TaskService;
