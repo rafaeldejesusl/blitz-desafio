@@ -8,27 +8,27 @@ async function validateName(req: Request, res: Response, next: NextFunction) {
   const { name } = req.body;
   const searchedTask = await model.findByName(name);
   if (searchedTask.length > 0) {
-    next({ status: 400, message: 'Esta tarefa já existe' });
+    return next({ status: 400, message: 'Esta tarefa já existe' });
   }
-  next();
+  return next();
 }
 
 async function validateId(req: Request, res: Response, next: NextFunction) {
   const { id } = req.params;
   const searchedTask = await model.findById(Number(id));
   if (searchedTask.length === 0) {
-    next({ status: 400, message: 'Esta tarefa não existe' });
+    return next({ status: 400, message: 'Esta tarefa não existe' });
   }
-  next();
+  return next();
 }
 
 async function validateStatus(req: Request, res: Response, next: NextFunction) {
   const { status } = req.body;
   const statusList = ['Pendente', 'Em Andamento', 'Pronto'];
   if (!statusList.includes(status)) {
-    next({ status: 400, message: 'Status inválido' });
+    return next({ status: 400, message: 'Status inválido' });
   }
-  next();
+  return next();
 }
 
 export { validateName, validateId, validateStatus };
