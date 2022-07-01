@@ -25,6 +25,13 @@ class TaskController {
     await this.service.erase(Number(id));
     return res.status(204).end();
   };
+
+  public edit = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    await this.service.edit(Number(id), status);
+    return res.status(204).end();
+  };
 }
 
 export default TaskController;
