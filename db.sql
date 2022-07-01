@@ -13,6 +13,3 @@ CREATE TABLE Tasks (
 ) ENGINE=INNODB;
 
 SET SQL_SAFE_UPDATES = 0;
-
-INSERT INTO Ebytr.Tasks (name, createdAt, status) VALUES
-    ("Algo", NOW(), 'Ativo');
