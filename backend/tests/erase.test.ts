@@ -6,14 +6,11 @@ import chaiHttp from 'chai-http';
 
 import app from '../src/index';
 import connection from '../src/models/connection';
-import TaskModel from '../src/models/task.model';
-import { ResultSetHeader } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
-
-const model = new TaskModel(connection);
 
 describe('Quando é feita a requisição', () => {
   before(() => {
@@ -27,14 +24,15 @@ describe('Quando é feita a requisição', () => {
       serverStatus: 0,
       warningStatus: 0,
     };
+    const execute1 = { id: 1, name: 'algo', createdAt: new Date(), status: 'ativo'} as RowDataPacket;
 
-    sinon.stub(connection, 'execute').resolves([execute, []]);
-    sinon.stub(model, 'findById').resolves([{ id: 1, name: 'algo', createdAt: new Date(), status: 'ativo'}]);
+    const mock = sinon.stub(connection, 'execute');
+    mock.onCall(0).resolves([[execute1], []]);
+    mock.onCall(1).resolves([execute, []])
   });
 
   after(() => {
     (connection.execute as sinon.SinonStub).restore();
-    (model.findById as sinon.SinonStub).restore();
   });
 
   it('Método delete /tasks/:id', async () => {
@@ -45,11 +43,13 @@ describe('Quando é feita a requisição', () => {
 
 describe('Quando é feita a requisição', () => {
   before(() => {
-    sinon.stub(model, 'findById').resolves([]);
+    const execute = [] as RowDataPacket[];
+
+    sinon.stub(connection, 'execute').resolves([execute, []]);
   });
 
   after(() => {
-    (model.findById as sinon.SinonStub).restore();
+    (connection.execute as sinon.SinonStub).restore();
   });
 
   it('Método delete /tasks/:id com id não existente', async () => {

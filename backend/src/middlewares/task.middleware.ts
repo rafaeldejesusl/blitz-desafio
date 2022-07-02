@@ -10,7 +10,6 @@ async function validateName(req: Request, res: Response, next: NextFunction) {
   if (searchedTask.length > 0) {
     return next({ status: 400, message: 'Esta tarefa já existe' });
   }
-  console.log(searchedTask);
   return next();
 }
 

@@ -6,14 +6,11 @@ import chaiHttp from 'chai-http';
 
 import app from '../src/index';
 import connection from '../src/models/connection';
-import TaskModel from '../src/models/task.model';
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
-
-const model = new TaskModel(connection);
 
 describe('Quando é feita a requisição', () => {
   let clock: any;
@@ -30,15 +27,16 @@ describe('Quando é feita a requisição', () => {
       serverStatus: 0,
       warningStatus: 0,
     };
+    const execute1 = [] as RowDataPacket[];
 
     clock = sinon.useFakeTimers(time.getTime());
-    sinon.stub(connection, 'execute').resolves([execute, []]);
-    sinon.stub(model, 'findByName').resolves([]);
+    const mock = sinon.stub(connection, 'execute');
+    mock.onCall(0).resolves([execute1, []]);
+    mock.onCall(1).resolves([execute, []])
   });
 
   after(() => {
     (connection.execute as sinon.SinonStub).restore();
-    (model.findByName as sinon.SinonStub).restore();
     clock.restore();
   });
 
@@ -56,13 +54,13 @@ describe('Quando é feita a requisição', () => {
       name: 'algo',
       createdAt: new Date(),
       status: 'ativo',
-    }
+    } as RowDataPacket;
 
-    sinon.stub(model, 'findByName').resolves([execute]);
+    sinon.stub(connection, 'execute').resolves([[execute], []]);
   });
 
   after(() => {
-    (model.findByName as sinon.SinonStub).restore();
+    (connection.execute as sinon.SinonStub).restore();
   });
 
   it('Método post /tasks com nome já existente', async () => {
@@ -78,26 +76,13 @@ describe('Quando é feita a requisição', () => {
   const time = new Date();
 
   before(() => {
-    const execute: ResultSetHeader = { constructor: {
-        name: 'ResultSetHeader'
-      },
-      affectedRows: 0,
-      fieldCount: 0,
-      info: '0',
-      insertId: 1,
-      serverStatus: 0,
-      warningStatus: 0,
-    };
+    const execute = [] as RowDataPacket[];
 
-    clock = sinon.useFakeTimers(time.getTime());
     sinon.stub(connection, 'execute').resolves([execute, []]);
-    sinon.stub(model, 'findByName').resolves([{ id: 1, name: 'algo', createdAt: new Date(), status: 'ativo'}]);
   });
 
   after(() => {
     (connection.execute as sinon.SinonStub).restore();
-    (model.findByName as sinon.SinonStub).restore();
-    clock.restore();
   });
 
   it('Método post /tasks com status inválido', async () => {
