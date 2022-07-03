@@ -15,7 +15,7 @@ function Home() {
       const data = await results.data;
       setTasks(data);
     } catch (error) {
-      window.alert(error.response.data.message);
+      console.log(error);
     }
   };
 
@@ -24,7 +24,7 @@ function Home() {
       await api.post('/tasks', { name, status });
       await fetchTasks();
     } catch (error) {
-      window.alert(error.response.data.message);
+      console.log(error);
     }
   };
 
@@ -33,7 +33,7 @@ function Home() {
       await api.put(`/tasks/${id}`, { status });
       await fetchTasks();
     } catch (error) {
-      window.alert(error.response.data.message);
+      console.log(error);
     }
   };
 
@@ -42,7 +42,7 @@ function Home() {
       await api.delete(`/tasks/${id}`);
       await fetchTasks();
     } catch (error) {
-      window.alert(error.response.data.message);
+      console.log(error);
     }
   };
 
