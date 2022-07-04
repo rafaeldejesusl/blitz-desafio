@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Button(props) {
-  const { text, handleClick, id } = props;
+  const { text, handleClick, id, type } = props;
 
   return (
     <button
       type="submit"
+      className={type}
       id={id}
       onClick={(e) => handleClick(e)}
     >
@@ -22,6 +23,7 @@ Button.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default Button;
