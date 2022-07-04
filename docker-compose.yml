@@ -16,12 +16,12 @@ services:
     # Restarta a imagem caso algo a faça parar
     restart: always
     # Diretório padrão de execução
-    working_dir: /app
+    working_dir: /app/back
     # Lista de volumes (diretórios) mapeados de fora para dentro do container
     volumes:
       # Monta o diretório atual, com todos os dados do projeto, 
       # dentro do diretório /app
-      - ./backend:/app
+      - ./backend:/app/back
     # Lista de portas mapeadas de dentro para fora do container
     # na notação porta_de_fora:porta_de_dentro
     ports:
@@ -45,6 +45,7 @@ services:
   frontend:
     build: ./frontend
     container_name: blitz-front
+    working_dir: /app/front
     ports:
       - 3000:3000
     depends_on:
