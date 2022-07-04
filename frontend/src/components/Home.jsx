@@ -51,11 +51,11 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Lista de Tarefas</h1>
+    <main>
+      <h1 className="text-center my-4">Lista de Tarefas</h1>
       <Form saveTask={saveTask} updateTask={updateTask} />
       <TaskList tasks={tasks} removeTask={removeTask} />
-    </div>
+    </main>
   );
 }
 

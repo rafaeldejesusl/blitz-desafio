@@ -27,11 +27,12 @@ function Form(props) {
   };
 
   return (
-    <form>
+    <form className="d-flex justify-content-around w-50 mx-auto mb-4">
       <label htmlFor="name-input">
         Tarefa:
         <input
           type="text"
+          className="form-control"
           id="name-input"
           name="name"
           value={isEditing ? edited.name : name}
@@ -42,6 +43,7 @@ function Form(props) {
         Status:
         <select
           name="status"
+          className="form-select"
           id="status-input"
           onChange={(e) => setStatus(e.target.value)}
           value={status}
@@ -52,8 +54,18 @@ function Form(props) {
         </select>
       </label>
       { isEditing
-        ? <Button text="Editar Tarefa" handleClick={handleclick} id="edit-button" />
-        : <Button text="Criar Tarefa" handleClick={handleclick} id="create-button" /> }
+        ? <Button
+          type="btn btn-outline-light h-50 align-self-end"
+          text="Editar Tarefa" 
+          handleClick={handleclick}
+          id="edit-button"
+        />
+        : <Button
+          type="btn btn-outline-light h-50 align-self-end"
+          text="Criar Tarefa"
+          handleClick={handleclick}
+          id="create-button"
+        /> }
     </form>
   );
 }

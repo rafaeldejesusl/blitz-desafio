@@ -19,29 +19,43 @@ function TaskList(props) {
   };
 
   return (
-    <table>
+    <table className="table w-75 mx-auto bg-white table-hover table-bordered text-center">
       <thead>
         <tr>
-          <td>Tarefa</td>
-          <td>Criado em</td>
-          <td>Status</td>
-          <td>Editar</td>
-          <td>Remover</td>
+          <td style={{ width: "30%" }}>Tarefa</td>
+          <td style={{ width: "30%" }}>Criado em</td>
+          <td style={{ width: "30%" }}>Status</td>
+          <td style={{ width: "10%" }}>Editar</td>
+          <td style={{ width: "10%" }}>Remover</td>
         </tr>
       </thead>
-      { tasks.length > 0 && tasks.map((task) => (
-        <tbody key={task.id}>
-          <tr>
+      <tbody>
+        { tasks.length > 0 && tasks.map((task) => (
+          <tr key={task.id}>
             <td>{ task.name }</td>
             <td>
               { new Date(task.createdAt).toLocaleString('pt-BR', { timeZone: 'America/Bahia' }) }
             </td>
             <td>{ task.status }</td>
-            <td><Button text="E" handleClick={handleClick} id={task.id} /></td>
-            <td><Button text="X" handleClick={handleDelete} id={task.id} /></td>
+            <td>
+              <Button
+                type="btn btn-warning btn-sm"
+                text="E" 
+                handleClick={handleClick}
+                id={task.id}
+              />
+            </td>
+            <td>
+              <Button
+                type="btn btn-danger btn-sm"
+                text="X"
+                handleClick={handleDelete}
+                id={task.id}
+              />
+            </td>
           </tr>
-        </tbody>
-      )) }
+        )) }
+      </tbody>
     </table>
   );
 }
