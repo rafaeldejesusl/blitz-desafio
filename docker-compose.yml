@@ -12,7 +12,7 @@ services:
     # Mesmo que `docker run -i`
     stdin_open: true
     # Substitui o comando padrão da imagem do node
-    command: bash
+    command: bash -c "npm run restore && npm run dev"
     # Restarta a imagem caso algo a faça parar
     restart: always
     # Diretório padrão de execução
@@ -22,6 +22,7 @@ services:
       # Monta o diretório atual, com todos os dados do projeto, 
       # dentro do diretório /app
       - ./backend:/app/back
+      - /app/back/node_modules
     # Lista de portas mapeadas de dentro para fora do container
     # na notação porta_de_fora:porta_de_dentro
     ports:
