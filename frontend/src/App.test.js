@@ -97,14 +97,27 @@ describe('A página permite organização', () => {
     userEvent.type(nameInput, 'Programar');
     userEvent.selectOptions(statusInput, 'Pendente');
     userEvent.click(submitButton);
-    userEvent.clear(nameInput);
+    await waitFor(async () => {
+      const taskName = await screen.findByRole('cell', { name: 'Programar' });
+
+      expect(taskName).toBeInTheDocument();
+    });
     userEvent.type(nameInput, 'Estudar');
     userEvent.selectOptions(statusInput, 'Em Andamento');
     userEvent.click(submitButton);
-    userEvent.clear(nameInput);
+    await waitFor( async () => {
+      const taskName = await screen.findByRole('cell', { name: 'Estudar' });
+
+      expect(taskName).toBeInTheDocument();
+    });
     userEvent.type(nameInput, 'Dormir');
     userEvent.selectOptions(statusInput, 'Pronto');
     userEvent.click(submitButton);
+    await waitFor( async () => {
+      const taskName = await screen.findByRole('cell', { name: 'Dormir' });
+
+      expect(taskName).toBeInTheDocument();
+    });
 
     const rowHeaders = await screen.findAllByTestId('row-header');
 
